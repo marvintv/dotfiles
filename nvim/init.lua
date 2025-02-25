@@ -24,4 +24,4 @@ for _, source in ipairs({ "buffer", "path", "nvim_lsp" }) do
 end
 
 -- Bootstrap lazy.nvim
-require("config.lazy")
+require("plugins.lazy")
