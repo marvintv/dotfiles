@@ -2,6 +2,16 @@
 # Launch yazi file manager
 
 if command -v yazi &> /dev/null; then
+    # Use existing configuration in ~/.config/yazi
+    YAZI_CONFIG_DIR="$HOME/.config/yazi"
+    
+    # Ensure config directory exists
+    if [ ! -d "$YAZI_CONFIG_DIR" ]; then
+        mkdir -p "$YAZI_CONFIG_DIR"
+        echo "Created Yazi config directory at $YAZI_CONFIG_DIR"
+    fi
+    
+    # Launch yazi with arguments
     yazi "$@"
 else
     echo "Yazi is not installed. Install it with 'brew install yazi'"
