@@ -8,5 +8,6 @@ mkdir -p "$HOME/.config"
 ln -sf "$HOME/dotfiles/nvim" "$HOME/.config/nvim"
 ln -sf "$HOME/dotfiles/tmux" "$HOME/.config/tmux"
 ln -sf "$HOME/dotfiles/yazi" "$HOME/.config/yazi"
+ln -sf "$HOME/dotfiles/.zshrc" "$HOME/.zshrc"
 
 echo "Config files linked successfully!"
