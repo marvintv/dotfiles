@@ -1,24 +1,23 @@
 # dotfiles
 
-> “We become what we behold. We shape our tools and then our tools shape us”.
+> "We become what we behold. We shape our tools and then our tools shape us".
 
 ## Configs
 ```bash
 git clone https://github.com/agalea91/dotfiles.git ~/dotfiles
-ln -s ~/dotfiles/alacritty ~/.config/alacritty
-ln -s ~/dotfiles/nvim ~/.config/nvim
-ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/nvim ~/.config/nvim
+ln -sf ~/dotfiles/tmux ~/.config/tmux
+ln -sf ~/dotfiles/yazi ~/.config/yazi
+ln -sf ~/dotfiles/.zshrc ~/.zshrc
 ```
 
 ## Scripts
 ```bash
 ./symlink_dotfiles.sh
-
-# Runs symlink command for each file in ~/dotfiles/bin
-# But ignores files that are already symlinked
-# e.g.
-# ln -s ~/dotfiles/bin/on ~/bin/on
 ```
 
-
+The symlink script will:
+- Create necessary config directories
+- Backup any existing configs (with .backup extension)
+- Create symlinks for nvim, tmux, yazi configs and .zshrc
+- Provide feedback on the process
