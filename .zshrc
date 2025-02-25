@@ -1,133 +1,131 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Shell config
-export LANG=en_US.UTF-8
+# ======================
+# ZSH Configuration
+# ======================
 
-# Alacritty config
-# https://chatgpt.com/c/a7b8eecc-e9d4-490d-9379-583c954945e3
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word
-
-# Extend PATH
-export PATH=~/bin:$PATH
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH" # Add homebrew java to path
-
-# Load credentials
-source $HOME/.secrets.sh
-
-# Neovim
-alias v=nvim
-alias vim=nvim
-export VISUAL=nvim
-# export EDITOR="$VISUAL"
-
-# Zoxide
-# eval "$(zoxide init --cmd=cd zsh)"
-
-# Tmux
-alias t=tmux
-
-# Python
-# Note: use symlinks, e.g.
-# >>> ln -vs /opt/homebrew/bin/python3.9 ~/bin/python
-# >>> ln -vs /opt/homebrew/bin/pip3.9 ~/bin/pip
-alias python3.12=/opt/homebrew/bin/python3.12
-alias pip3.12=/opt/homebrew/bin/pip3.12
-alias pyv=$HOME/virtualenvs/adhoc/bin/python
-alias piv=$HOME/virtualenvs/adhoc/bin/pip
-alias jn='$HOME/virtualenvs/adhoc/bin/jupyter notebook'
-alias jc='$HOME/virtualenvs/adhoc/bin/jupyter console'
-export JUPYTER_NOTEBOOK_STYLE='from IPython.display import HTML;HTML("<style>div.text_cell_render{font-size:130%;padding-top:50px;padding-bottom:50px}</style>")'
-
-# Git
-alias gits='git status'
-alias gita='git add -u'
-gitm() { git commit -m "$1" }
-alias gitp='git push'
-alias gitu='git commit -m "Update $(date +%F)"'
-alias gitq='git add -u && git commit -m "Update $(date +%F)" && git push'
-alias gitc='aicommits' # requires aicommits installed (https://github.com/Nutlope/aicommits)
-
-# Plain text
-export EDITOR='mate -w'
-nn() { touch ~/Downloads/$1 && mate $1 }
-
-# Obsidian
-alias oo='cd $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/ZazenCodes'
-alias or='vim $HOME/library/Mobile\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/inbox/*.md'
-alias ou='cd $HOME/notion-obsidian-sync-zazencodes && node batchUpload.js --lastmod-days-window 5'
-alias komo='cd $HOME/Google\ Drive/Other\ computers/My\ MacBook\ Pro/Obsidian/Komorebi\ Art\ Gallery'
-
-# Path shortcuts
-alias nvc='cd $HOME/.config/nvim && vim'
-alias zc='cd $HOME/pro/zazencodes-season-2/src'
-
-# App aliases
-alias cat='bat -pp'
-alias vue='$HOME/.yarn/bin/vue'
-alias httpx='$HOME/go/bin/httpx'
-alias sqlj='java -jar /Applications/SQLWorkbenchJ.app/Contents/Java/sqlworkbench.jar </dev/null &>/dev/null &'
-
-# App shortcuts
-alias lg=lazygit
-alias leet="nvim leetcode.nvim"
-
-# Dir list, nav
-alias pwdy="echo $(pwd) | pbcopy"
-alias cl="clear"
-alias z="cd"
-alias lr="ls -lrt"
-# alias zr="cd $(ls -td -- $(pwd)/*/ | head -n 1)"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-
-# Zsh
+# Enable Powerlevel10k theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git colored-man-pages colorize python macos zsh-syntax-highlighting)
-export ZSH="$HOME/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
+
+# Load Powerlevel10k (if not already loaded)
+if [[ -f ~/powerlevel10k/powerlevel10k.zsh-theme ]]; then
+    source ~/powerlevel10k/powerlevel10k.zsh-theme
+else
+    echo "Powerlevel10k not found. Install it with:"
+    echo "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k"
+fi
+
+# ======================
+# Environment Variables
+# ======================
+
+# Set PATH to include system binaries and user-specific directories
+export PATH="/bin:/usr/bin:/usr/local/bin:$HOME/Library/Python/3.13/bin:$HOME/.local/bin:$PATH"
+
+# Source additional environment settings (if the file exists)
+if [[ -f "$HOME/.local/bin/env" ]]; then
+    source "$HOME/.local/bin/env"
+fi
+
+# ======================
+# Aliases
+# ======================
+
+# Activate the aider virtual environment
+# alias aiderenv="source /Users/marvinvilaysack/aider-env/bin/activate"
+
+# Common shortcuts
+alias ll="ls -la"  # List all files in long format
+alias cls="clear"  # Clear the terminal screen
+
+# ======================
+# Custom Functions
+# ======================
+
+# Create a new directory and cd into it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# ======================
+# Plugins (Optional)
+# ======================
+
+# Enable ZSH plugins (if using Oh My Zsh or similar)
+# Example:
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+
+# ======================
+# Miscellaneous
+# ======================
+
+# Set default editor (e.g., nano or vim)
+export EDITOR="nvim"
+
+# Enable color support for commands like ls
+export CLICOLOR=1
+export LSCOLORS="ExFxBxDxCxegedabagacad"
+
+# ======================
+# End of Configuration
+# ======================
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+alias python="python3"
+export PATH="/Users/marvinvilaysack/Library/Python/3.9/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/alex/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/alex/google-cloud-sdk/path.zsh.inc'; fi
+## alias
+#
+#alias vi='nvim'
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/alex/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/alex/google-cloud-sdk/completion.zsh.inc'; fi
+alias vi='nvim'
+DISABLE_AUTO_TITLE="true"
 
-# Nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/alex/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/alex/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/Users/alex/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/alex/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+fzf_cd() {
+  # Find directories and let fzf select one
+  local dir
+  dir=$(find . -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+alias fcd=fzf_cd
 
 
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+# Function to add and push updates to dotfiles with chezmoi
+function chezmoi_push() {
+    chezmoi add ~/.zshrc
+    cd ~/.local/share/chezmoi || { echo "chezmoi directory not found"; return 1; }
+    git commit -am "Updated .zshrc"
+    git push
+    echo "Dotfiles updated and pushed successfully!"
+}
 
-# Created by `pipx`
-export PATH="$PATH:/Users/alex/.local/bin"
+# Pretty print aliases and functions
+function zlist() {
+    echo -e "\n\033[1;34m=== Custom Aliases ===\033[0m"
+    grep '^alias ' ~/.zshrc | awk -F'=' '{printf "\033[1;32m%-20s\033[0m %s\n", $1, $2}' | column -t -s '='
 
-# AI
-alias llm_deepseek="llm -m deepseek-r1:8b "
-alias llm_cat_dir="find . -maxdepth 1 -type f | xargs -I {} sh -c 'echo \"\n=== {} ===\n\"; cat {}'"
+    echo -e "\n\033[1;34m=== Custom Functions ===\033[0m"
+    grep '^function ' ~/.zshrc | awk '{print "\033[1;36m" $0 "\033[0m"}'
+
+    echo -e "\n\033[1;34m=== End of List ===\033[0m"
+}
+
+# Short alias for easy access
+alias zcmds="zlist"
+
+# Enable autocompletion
+autoload -Uz compinit
+compinit
+alias config='cd ~/.config'
+
+
+
