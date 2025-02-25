@@ -3,6 +3,9 @@
 DOTFILES_DIR=~/dotfiles/bin
 TARGET_DIR=~/bin
 
+# Create target directory if it doesn't exist
+mkdir -p "$TARGET_DIR"
+
 for file in "$DOTFILES_DIR"/*; do
     filename=$(basename "$file")
     target="$TARGET_DIR/$filename"

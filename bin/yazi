@@ -1,0 +1,9 @@
+#!/bin/zsh
+# Launch yazi file manager
+
+if command -v yazi &> /dev/null; then
+    yazi "$@"
+else
+    echo "Yazi is not installed. Install it with 'brew install yazi'"
+    exit 1
+fi

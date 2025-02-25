@@ -1,0 +1,5 @@
+#!/bin/zsh
+# Reload zsh configuration
+
+source ~/.zshrc
+echo "Reloaded zsh configuration"
