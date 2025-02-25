@@ -1,5 +1,25 @@
 # Neovim LazyVim Configuration Reference
 
+## Dotfiles Setup
+My dotfiles are stored at ~/dotfiles with the following structure:
+- ~/dotfiles/nvim - Neovim configuration
+- ~/dotfiles/tmux - Tmux configuration
+- ~/dotfiles/zsh - Zsh configuration
+
+To set up the dotfiles:
+```bash
+# Clone the dotfiles repository
+git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
+
+# Create symbolic links
+ln -s ~/dotfiles/nvim ~/.config/nvim
+ln -s ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf
+ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc
+
+# Run the symlink script for bin files
+./symlink_dotfiles.sh
+```
+
 ## Plugin Management
 ### Fixing nvim-cmp Module Load Issues
 - Set `lazy = false` and high `priority` for nvim-cmp to ensure it loads first
@@ -60,6 +80,7 @@
 - `<leader>w` - Save current buffer
 - `<leader>p/n` - Previous/next buffer
 - `<leader>x` - Close buffer
+- `<leader>y` - Yank to clipboard
 
 ## Markdown Preview
 - Open a markdown file (*.md)
