@@ -25,3 +25,13 @@ end
 
 -- Bootstrap lazy.nvim
 require("config.lazy")
+
+-- disable auto spell check
+vim.opt.spell = true
+
+-- enable cursorline
+vim.opt.cursorline = true
+
+-- set the cursor to a thin vertical line
+
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"

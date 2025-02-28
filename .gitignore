@@ -1,1 +1,6 @@
 .aider*
+nvim/.DS_Store
+nvim/nvim
+tmux/tmux
+yazi/yazi
+.DS_Store

@@ -16,3 +16,13 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 
 -- save file
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
+
+-- Terminal
+vim.keymap.set("n", "<C-_>", function()
+  require("lazyvim.util.terminal").open(nil, { cwd = require("lazyvim.util").root() })
+end, { desc = "Terminal (Root Dir)" })
+
+vim.keymap.set("t", "<C-_>", "<cmd>close<CR>", { desc = "Hide Terminal", noremap = true, silent = true })
+
+-- format code using Telescope
+vim.keymap.set("n", "<leader>fmd", vim.lsp.buf.format)
