@@ -145,3 +145,7 @@ function tmux_last_session(){
     tmux attach -t $LAST_TMUX_SESSION
 }
 bindkey -s '^s' 'tmux_last_session ^M'
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/marvinvilaysack/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
