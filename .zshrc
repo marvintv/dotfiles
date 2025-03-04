@@ -121,7 +121,7 @@ function zlist() {
 
 # Short alias for easy access
 alias zcmds="zlist"
-
+alias k="kubectl"
 # Enable autocompletion
 autoload -Uz compinit
 compinit
@@ -149,3 +149,5 @@ bindkey -s '^s' 'tmux_last_session ^M'
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/marvinvilaysack/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
