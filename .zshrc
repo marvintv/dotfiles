@@ -123,8 +123,8 @@ function zlist() {
 alias zcmds="zlist"
 alias k="kubectl"
 # Enable autocompletion
-autoload -Uz compinit
-compinit
+# autoload -Uz compinit
+# compinit
 alias config='cd ~/.config'
 
 
@@ -151,3 +151,5 @@ export PATH="/Users/marvinvilaysack/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+autoload -Uz compinit && compinit
