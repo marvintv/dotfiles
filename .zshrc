@@ -5,6 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Load completion system early
+autoload -Uz compinit
+compinit
+
 # ======================
 # ZSH Configuration
 # ======================
@@ -149,7 +153,7 @@ bindkey -s '^s' 'tmux_last_session ^M'
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/marvinvilaysack/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+# Autoload compinit is now at the top of the file
 
-autoload -Uz compinit && compinit
+# kubectl completion (will now work properly with compinit loaded above)
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
