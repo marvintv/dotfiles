@@ -26,8 +26,14 @@ end
 -- Bootstrap lazy.nvim
 require("config.lazy")
 
--- disable auto spell check
-vim.opt.spell = true
+-- Disable spell check globally except for markdown and text files
+vim.opt.spell = false  -- Disable spell check globally first
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text" },  -- Only enable for these file types
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
 
 -- enable cursorline
 vim.opt.cursorline = true
