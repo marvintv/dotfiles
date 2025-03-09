@@ -17,6 +17,8 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "xml",
+        "json",
       },
       -- Auto install above language parsers
       auto_install = true,
