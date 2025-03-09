@@ -14,6 +14,9 @@ vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "To
 -- yank to clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 
+-- yank entire file to clipboard
+vim.keymap.set("n", "<leader>ya", "<cmd>%y+<CR>", { desc = "Yank entire file to clipboard" })
+
 -- save file
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 
