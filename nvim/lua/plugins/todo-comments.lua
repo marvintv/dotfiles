@@ -32,7 +32,7 @@ return {
         before = "",
         keyword = "wide",
         after = "fg",
-        pattern = [[.*@?(KEYWORDS)\s*:]], 
+        pattern = [[.*<(KEYWORDS)]], -- Simplified pattern to avoid NFA regexp errors
         comments_only = true,
         max_line_len = 400,
         exclude = {},
@@ -55,7 +55,7 @@ return {
           "--column",
         },
         -- Using a very simple pattern to avoid regexp errors
-        pattern = [[\b(KEYWORDS)]],
+        pattern = [[(\b|^)(KEYWORDS)(\b|$)]], -- More robust pattern that avoids quantifier issues
       },
     })
   end,
