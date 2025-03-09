@@ -9,7 +9,7 @@ return {
       sign_priority = 8,
       keywords = {
         FIX = {
-          icon = " ", 
+          icon = " ",
           color = "error",
           alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
         },
@@ -43,7 +43,7 @@ return {
         info = { "DiagnosticInfo", "#2563EB" },
         hint = { "DiagnosticHint", "#10B981" },
         default = { "Identifier", "#7C3AED" },
-        test = { "Identifier", "#FF00FF" }
+        test = { "Identifier", "#FF00FF" },
       },
       search = {
         command = "rg",
@@ -61,9 +61,21 @@ return {
   end,
   keys = {
     { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
-    { "<leader>fT", "<cmd>TodoTrouble<cr>", desc = "TODOs in Trouble" },
-    { "<leader>fq", "<cmd>TodoQuickFix<cr>", desc = "TODOs in QuickFix" },
-    { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-    { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+    { "<leader>fT", "<cmd>TodoTrouble<cr>",   desc = "TODOs in Trouble" },
+    { "<leader>fq", "<cmd>TodoQuickFix<cr>",  desc = "TODOs in QuickFix" },
+    {
+      "]t",
+      function()
+        require("todo-comments").jump_next()
+      end,
+      desc = "Next todo comment",
+    },
+    {
+      "[t",
+      function()
+        require("todo-comments").jump_prev()
+      end,
+      desc = "Previous todo comment",
+    },
   },
 }
