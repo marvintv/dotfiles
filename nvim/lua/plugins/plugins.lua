@@ -29,6 +29,21 @@ return {
       vim.g.mkdp_preview_options = {
         sync_scroll_type = 'middle',
       }
+      
+      -- Auto open browser after entering markdown buffer
+      vim.g.mkdp_auto_start = 0
+      
+      -- Auto close browser when leaving markdown buffer
+      vim.g.mkdp_auto_close = 0
+      
+      -- Use a specific browser (uncomment if needed)
+      -- vim.g.mkdp_browser = 'safari'
+      
+      -- Preview server available to others on your network
+      vim.g.mkdp_open_to_the_world = 0
+      
+      -- Combine CSS for customization
+      vim.g.mkdp_markdown_css = ''
     end,
     keys = {
       { "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", desc = "Toggle Markdown Preview" },
