@@ -16,8 +16,12 @@ return {
             "--line-number",
             "--column",
             "--smart-case",
-            "--fixed-strings", -- Disable regex interpretation
           },
+          file_ignore_patterns = {
+            "%.git/.*",
+            "node_modules/.*",
+          },
+          path_display = { "truncate" },
         },
       })
       -- Load extensions
