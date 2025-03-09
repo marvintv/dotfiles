@@ -105,8 +105,8 @@ return {
             "--line-number",
             "--column",
           },
-          -- More standard pattern that matches the documentation
-          pattern = [[\b(KEYWORDS):]], 
+          -- Simpler pattern to avoid regexp errors
+          pattern = [[\b(KEYWORDS)]], 
         },
       })
     end,
