@@ -631,8 +631,47 @@ return {
 ================
 File: nvim/lua/plugins/markdown-preview.lua
 ================
--- This configuration has been moved to plugins.lua
-return {}
+return {
+  "iamcco/markdown-preview.nvim",
+  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  ft = { "markdown" },
+  build = function() 
+    vim.fn["mkdp#util#install"]() 
+  end,
+  init = function()
+    vim.g.mkdp_filetypes = { "markdown" }
+  end,
+  config = function()
+    -- Debug: Show preview URL in messages (important for troubleshooting)
+    vim.g.mkdp_echo_preview_url = 1
+    
+    -- Don't try to open browser automatically - just show the URL
+    vim.g.mkdp_auto_start = 0
+    vim.g.mkdp_auto_close = 0
+    vim.g.mkdp_open_to_the_world = 0
+    
+    -- Use a specific port for easier access
+    vim.g.mkdp_port = '8090'
+    
+    -- Custom page title
+    vim.g.mkdp_page_title = '${name} - Markdown Preview'
+    
+    -- Important: Don't use the browserfunc which might be failing
+    vim.g.mkdp_browser = ''
+    vim.g.mkdp_browserfunc = ''
+    
+    -- Add a notification to show the URL clearly
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "MarkdownPreviewStart",
+      callback = function()
+        vim.notify("Markdown preview started. Open http://localhost:8090 in your browser.", vim.log.levels.INFO)
+      end,
+    })
+  end,
+  keys = {
+    { "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", desc = "Toggle Markdown Preview" },
+  },
+}
 
 ================
 File: nvim/lua/plugins/mini-icons.lua
