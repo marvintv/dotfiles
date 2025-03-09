@@ -22,6 +22,11 @@ return {
             "node_modules/.*",
           },
           path_display = { "truncate" },
+          -- Simplified pattern to avoid NFA regexp errors
+          generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter(),
+          file_sorter = require("telescope.sorters").get_fuzzy_file(),
+          grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+          qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
         },
       })
       -- Load extensions
