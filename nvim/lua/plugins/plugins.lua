@@ -51,16 +51,17 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    event = "VeryLazy",
+    cmd = { "TodoTrouble", "TodoTelescope", "TodoLocList", "TodoQuickFix" },
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("todo-comments").setup({
         signs = true,
         sign_priority = 8,
         keywords = {
           FIX = {
-            icon = " ", -- icon used for the sign, and in search results
-            color = "error", -- can be a hex color, or a named color (see below)
-            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+            icon = " ", 
+            color = "error",
+            alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
           },
           TODO = { icon = " ", color = "info" },
           HACK = { icon = " ", color = "warning" },
@@ -69,14 +70,31 @@ return {
           NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
           TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
         },
+        gui_style = {
+          fg = "NONE",
+          bg = "BOLD",
+        },
+        merge_keywords = true,
         highlight = {
-          before = "", -- "fg" or "bg" or empty
-          keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty
-          after = "fg", -- "fg" or "bg" or empty
-          pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
-          comments_only = true, -- uses treesitter to match keywords in comments only
-          max_line_len = 400, -- ignore lines longer than this
-          exclude = {}, -- list of file types to exclude highlighting
+          multiline = true,
+          multiline_pattern = "^.",
+          multiline_context = 10,
+          before = "",
+          keyword = "wide",
+          after = "fg",
+          -- Standard pattern that works in most cases
+          pattern = [[.*@?(KEYWORDS)\s*:]], 
+          comments_only = true,
+          max_line_len = 400,
+          exclude = {},
+        },
+        colors = {
+          error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+          warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+          info = { "DiagnosticInfo", "#2563EB" },
+          hint = { "DiagnosticHint", "#10B981" },
+          default = { "Identifier", "#7C3AED" },
+          test = { "Identifier", "#FF00FF" }
         },
         search = {
           command = "rg",
@@ -87,12 +105,15 @@ return {
             "--line-number",
             "--column",
           },
-          pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+          -- More standard pattern that matches the documentation
+          pattern = [[\b(KEYWORDS):]], 
         },
       })
     end,
     keys = {
       { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
+      { "<leader>fT", "<cmd>TodoTrouble<cr>", desc = "TODOs in Trouble" },
+      { "<leader>fq", "<cmd>TodoQuickFix<cr>", desc = "TODOs in QuickFix" },
       { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
       { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
     },
