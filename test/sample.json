@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "settings": {
+        "theme": "dark",
+        "notifications": true,
+        "languages": ["en", "es"]
+      }
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "settings": {
+        "theme": "light",
+        "notifications": false,
+        "languages": ["en", "fr"]
+      }
+    }
+  ],
+  "version": "1.0.0",
+  "lastUpdated": "2024-03-09T12:00:00Z"
+}
