@@ -26,3 +26,6 @@ vim.keymap.set("t", "<C-_>", "<cmd>close<CR>", { desc = "Hide Terminal", noremap
 
 -- format code using Telescope
 vim.keymap.set("n", "<leader>fmd", vim.lsp.buf.format)
+
+-- Oil.nvim
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
