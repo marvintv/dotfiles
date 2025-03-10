@@ -19,7 +19,7 @@ mkdir -p "$HOME/.config"
 backup_config "$HOME/.config/nvim"
 backup_config "$HOME/.config/tmux"
 backup_config "$HOME/.config/yazi"
-backup_config "$HOME/.zshrc"
+# backup_config "$HOME/.zshrc"
 
 #TODO
 
@@ -31,7 +31,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ln -sf "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 ln -sf "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 ln -sf "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
-ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+# ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
 echo "Config files linked successfully!"
 echo "Any existing configs have been backed up with .backup extension"
