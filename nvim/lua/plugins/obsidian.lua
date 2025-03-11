@@ -1,37 +1,33 @@
-return {
+local O = {
   "epwalsh/obsidian.nvim",
-  version = "*",  -- Use latest release instead of latest commit
+  version = "*", -- Use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
   dependencies = {
     -- Required
     "nvim-lua/plenary.nvim",
-    
+
     -- Optional, for completion
     "hrsh7th/nvim-cmp",
-    
+
     -- Optional, for search and quick-switch functionality
     "nvim-telescope/telescope.nvim",
-    
+
     -- Optional, for syntax highlighting
     "nvim-treesitter/nvim-treesitter",
   },
   config = function()
     require("obsidian").setup({
-      completion = {
-        nvim_cmp = true,  -- Enable nvim-cmp integration
-        min_chars = 2,
-      },
       workspaces = {
         {
           name = "current",
           path = ".", -- Use current directory
         },
       },
-      
+
       -- Optional, if you keep notes in a specific subdirectory
       notes_subdir = "notes",
-      
+
       -- Optional, customize how notes are named
       note_id_func = function(title)
         -- Create note IDs in a Zettelkasten format with a timestamp and a suffix
@@ -47,10 +43,10 @@ return {
         end
         return tostring(os.time()) .. "-" .. suffix
       end,
-      
+
       -- Customize the appearance of markdown links (e.g. "[link](path/to/note.md)")
       preferred_link_style = "markdown",
-      
+
       -- Mappings
       mappings = {
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault
@@ -68,13 +64,13 @@ return {
           opts = { buffer = true },
         },
       },
-      
+
       -- Optional, completion of wiki links, local markdown links, and tags
       completion = {
         nvim_cmp = true,
         min_chars = 2,
       },
-      
+
       -- Optional, configure additional syntax highlighting
       ui = {
         enable = true,
@@ -105,13 +101,15 @@ return {
     })
   end,
   keys = {
-    { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New Obsidian Note" },
-    { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Open in Obsidian App" },
-    { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search Obsidian Notes" },
+    { "<leader>on", "<cmd>ObsidianNew<cr>",         desc = "New Obsidian Note" },
+    { "<leader>oo", "<cmd>ObsidianOpen<cr>",        desc = "Open in Obsidian App" },
+    { "<leader>os", "<cmd>ObsidianSearch<cr>",      desc = "Search Obsidian Notes" },
     { "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick Switch" },
-    { "<leader>of", "<cmd>ObsidianFollowLink<cr>", desc = "Follow Link" },
-    { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Show Backlinks" },
-    { "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Insert Template" },
-    { "<leader>mp", "<cmd>ObsidianOpen<cr>", desc = "Open in Obsidian" },
+    { "<leader>of", "<cmd>ObsidianFollowLink<cr>",  desc = "Follow Link" },
+    { "<leader>ob", "<cmd>ObsidianBacklinks<cr>",   desc = "Show Backlinks" },
+    { "<leader>ot", "<cmd>ObsidianTemplate<cr>",    desc = "Insert Template" },
+    { "<leader>mp", "<cmd>ObsidianOpen<cr>",        desc = "Open in Obsidian" },
   },
 }
+
+return O
