@@ -18,6 +18,8 @@ vim.opt.sidescrolloff = 8 --minimum number of columns to keep above and below th
 vim.opt.signcolumn = "yes" -- always show the sign column, to avoid text shifting when signs are displayed
 vim.opt.isfname:append("@-@") -- include '@' in the set of characters considered part of a file name
 vim.opt.updatetime = 50 -- Time in milliseconds to wait before triggering the plugin events after a change
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.py",

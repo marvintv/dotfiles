@@ -157,6 +157,5 @@ export PATH="/Users/marvinvilaysack/.rd/bin:$PATH"
 
 # kubectl completion (will now work properly with compinit loaded above)
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.4.1 # run chruby to see actual version
+
+export PATH=~/.npm-global/bin:$PATH

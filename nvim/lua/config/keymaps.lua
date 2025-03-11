@@ -7,6 +7,16 @@ vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fin
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
+vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<CR>", { desc = "Find references" })
+
+-- Map to find references using LSP
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
+
+-- Map to highlight current word (like * but without moving cursor)
+vim.keymap.set("n", "<leader>h", "*N", { desc = "Highlight current word" })
+
+-- Turn off search highlighting with leader key
+vim.keymap.set("n", "<leader>n", ":noh<CR>", { silent = true, desc = "Clear search highlight" })
 
 -- Markdown Preview
 vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown Preview" })
@@ -19,6 +29,9 @@ vim.keymap.set("n", "<leader>ya", "<cmd>%y+<CR>", { desc = "Yank entire file to 
 
 -- save file
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
+
+-- Reset file to last saved state
+vim.keymap.set("n", "<leader>r", ":e!<CR>", { silent = true, desc = "Reset file to last saved state" })
 
 -- Terminal
 vim.keymap.set("n", "<C-_>", function()
