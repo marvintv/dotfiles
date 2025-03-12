@@ -1,5 +1,5 @@
 return {
-  'stevearc/oil.nvim',
+  "stevearc/oil.nvim",
   opts = {
     -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
     default_file_explorer = true,
@@ -15,16 +15,18 @@ return {
     keymaps = {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
-      ["<C-s>"] = { "actions.select", opts = { vertical = true }},
-      ["<C-h>"] = { "actions.select", opts = { horizontal = true }},
-      ["<C-t>"] = { "actions.select", opts = { tab = true }},
+      ["<C-s>"] = { "actions.select", opts = { vertical = true } },
+      ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
+      ["<C-t>"] = { "actions.select", opts = { tab = true } },
       ["<C-p>"] = "actions.preview",
       ["<C-c>"] = "actions.close",
       ["<C-l>"] = "actions.refresh",
+      -- ["<Space>"] = "actions.toggle_mark",
+      -- ["<C-o>"] = "actions.open_marked",
       ["-"] = "actions.parent",
       ["_"] = "actions.open_cwd",
       ["`"] = "actions.cd",
-      ["~"] = { "actions.cd", opts = { scope = "tab" }},
+      ["~"] = { "actions.cd", opts = { scope = "tab" } },
       ["g."] = "actions.toggle_hidden",
     },
     -- Set to false to disable all of the above keymaps
