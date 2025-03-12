@@ -1,9 +1,9 @@
-return {
-  -- Core completion engine
+return { -- Core completion engine
+
   {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
-    lazy = false, -- Load at startup, NOT lazy-loaded
+    lazy = false,    -- Load at startup, NOT lazy-loaded
     priority = 1000, -- Very high priority to ensure it loads first
     dependencies = {
       "L3MON4D3/LuaSnip",
@@ -34,6 +34,11 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-p>"] = cmp.mapping.select_prev_item(),

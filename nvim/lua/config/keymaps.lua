@@ -1,46 +1,55 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+-- keymaps are automatically loaded on the verylazy event
+-- default keymaps that are always set: https://github.com/lazyvim/lazyvim/blob/main/lua/lazyvim/config/keymaps.lua
+-- add any additional keymaps here
 
--- Telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
-vim.keymap.set("n", "<leader>fr", "<cmd>Telescope lsp_references<CR>", { desc = "Find references" })
+-- telescope
+vim.keymap.set("n", "<leader>ff", "<cmd>telescope find_files<cr>", { desc = "find files" })
+vim.keymap.set("n", "<leader>fg", "<cmd>telescope live_grep<cr>", { desc = "live grep" })
+vim.keymap.set("n", "<leader>fb", "<cmd>telescope buffers<cr>", { desc = "buffers" })
+vim.keymap.set("n", "<leader>fh", "<cmd>telescope help_tags<cr>", { desc = "help tags" })
+vim.keymap.set("n", "<leader>fr", "<cmd>telescope lsp_references<cr>", { desc = "find references" })
 
--- Map to find references using LSP
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
+-- map to find references using lsp
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "go to references" })
 
--- Map to highlight current word (like * but without moving cursor)
-vim.keymap.set("n", "<leader>h", "*N", { desc = "Highlight current word" })
+-- map to highlight current word (like * but without moving cursor)
+vim.keymap.set("n", "<leader>h", "*n", { desc = "highlight current word" })
 
--- Turn off search highlighting with leader key
-vim.keymap.set("n", "<leader>n", ":noh<CR>", { silent = true, desc = "Clear search highlight" })
+-- turn off search highlighting with leader key
+vim.keymap.set("n", "<leader>n", ":noh<cr>", { silent = true, desc = "clear search highlight" })
 
--- Markdown Preview
-vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown Preview" })
+-- markdown preview
+vim.keymap.set("n", "<leader>mp", "<cmd>markdownpreviewtoggle<cr>", { desc = "toggle markdown preview" })
 
 -- yank to clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 
 -- yank entire file to clipboard
-vim.keymap.set("n", "<leader>ya", "<cmd>%y+<CR>", { desc = "Yank entire file to clipboard" })
+vim.keymap.set("n", "<leader>ya", "<cmd>%y+<cr>", { desc = "yank entire file to clipboard" })
 
 -- save file
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "save file" })
 
--- Reset file to last saved state
-vim.keymap.set("n", "<leader>r", ":e!<CR>", { silent = true, desc = "Reset file to last saved state" })
+-- reset file to last saved state
+vim.keymap.set("n", "<leader>r", ":e!<cr>", { silent = true, desc = "reset file to last saved state" })
 
--- Terminal
-vim.keymap.set("n", "<C-_>", function()
+--
+vim.keymap.set("n", "<leader>t", function()
+  if vim.bo.buftype == "nofile" then
+    vim.cmd("hide")
+  else
+    vim.cmd("enew")
+  end
+end, { desc = "toggle between hiding nofile buffer or creating new buffer" })
+
+-- terminal
+vim.keymap.set("n", "<c-_>", function()
   require("lazyvim.util.terminal").open(nil, { cwd = require("lazyvim.util").root() })
-end, { desc = "Terminal (Root Dir)" })
+end, { desc = "terminal (root dir)" })
+-- terminal
+vim.keymap.set("t", "<c-_>", "<cmd>close<cr>", { desc = "hide terminal", noremap = true, silent = true })
 
-vim.keymap.set("t", "<C-_>", "<cmd>close<CR>", { desc = "Hide Terminal", noremap = true, silent = true })
-
--- format code using Telescope
+-- format code using telescope
 vim.keymap.set("n", "<leader>fmd", vim.lsp.buf.format)
 
 -- Oil.nvim
