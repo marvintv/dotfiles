@@ -24,8 +24,8 @@ return {
       },
       workspaces = {
         {
-          name = "personal",
-          path = "~/notes",
+          name = "current",
+          path = ".", -- Use current directory
         },
       },
       
