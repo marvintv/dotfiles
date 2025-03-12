@@ -18,6 +18,10 @@ return {
   },
   config = function()
     require("obsidian").setup({
+      completion = {
+        nvim_cmp = true,  -- Enable nvim-cmp integration
+        min_chars = 2,
+      },
       workspaces = {
         {
           name = "personal",
