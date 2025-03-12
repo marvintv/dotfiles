@@ -3,12 +3,17 @@ local O = {
   version = "*", -- Use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
+  event = {"BufReadPre *.md", "BufNewFile *.md"},
   dependencies = {
     -- Required
     "nvim-lua/plenary.nvim",
 
-    -- Optional, for completion
-    "hrsh7th/nvim-cmp",
+    -- Optional, for completion (ensure this loads first)
+    {
+      "hrsh7th/nvim-cmp",
+      lazy = false,
+      priority = 100,
+    },
 
     -- Optional, for search and quick-switch functionality
     "nvim-telescope/telescope.nvim",
@@ -65,9 +70,9 @@ local O = {
         },
       },
 
-      -- Optional, completion of wiki links, local markdown links, and tags
+      -- Disable completion since cmp module isn't available
       completion = {
-        nvim_cmp = true,
+        nvim_cmp = false,
         min_chars = 2,
       },
 

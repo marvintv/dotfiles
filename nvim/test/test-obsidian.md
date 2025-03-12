@@ -1,3 +1,9 @@
+---
+id: test-obsidian
+aliases: []
+tags: []
+---
+
 
 
 ## this is a 2025-03-09 01:16
@@ -13,10 +19,16 @@ This is a test file to verify that obsidian.nvim is working correctly.
 - [ ] Checkbox support
 - [x] Completed checkbox
 - [>] In-progress checkbox
-
+- [x] Completed checkbox
+- [x] Completed checkbox
 ## Links
+-[>]in In-progress
+
+
 
 - Internal link: [[test-markdown]]
+- Internal link: [[test-markdown]]
+- Internal link: [[thrivent]]
 - External link: [GitHub](https://github.com)
 
 ## Tags
@@ -30,7 +42,7 @@ function hello_world()
   print("Hello from Obsidian!")
 end
 ```
-
+> this ia quotes
 > This is a blockquote that should be styled properly
 
 ---
