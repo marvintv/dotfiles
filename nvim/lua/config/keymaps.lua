@@ -2,12 +2,12 @@
 -- default keymaps that are always set: https://github.com/lazyvim/lazyvim/blob/main/lua/lazyvim/config/keymaps.lua
 -- add any additional keymaps here
 
--- telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>telescope find_files<cr>", { desc = "find files" })
-vim.keymap.set("n", "<leader>fg", "<cmd>telescope live_grep<cr>", { desc = "live grep" })
-vim.keymap.set("n", "<leader>fb", "<cmd>telescope buffers<cr>", { desc = "buffers" })
-vim.keymap.set("n", "<leader>fh", "<cmd>telescope help_tags<cr>", { desc = "help tags" })
-vim.keymap.set("n", "<leader>fr", "<cmd>telescope lsp_references<cr>", { desc = "find references" })
+-- telescope - using function calls directly instead of commands
+vim.keymap.set("n", "<leader>ff", function() require("telescope.builtin").find_files() end, { desc = "find files" })
+vim.keymap.set("n", "<leader>fg", function() require("telescope.builtin").live_grep() end, { desc = "live grep" })
+vim.keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end, { desc = "buffers" })
+vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_tags() end, { desc = "help tags" })
+vim.keymap.set("n", "<leader>fr", function() require("telescope.builtin").lsp_references() end, { desc = "find references" })
 
 -- map to find references using lsp
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "go to references" })
