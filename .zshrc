@@ -16,7 +16,7 @@ compinit
 # Enable Powerlevel10k theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Load Powerlevel10k (if not already loaded)
+Load Powerlevel10k (if not already loaded)
 if [[ -f ~/powerlevel10k/powerlevel10k.zsh-theme ]]; then
     source ~/powerlevel10k/powerlevel10k.zsh-theme
 else
@@ -46,7 +46,9 @@ fi
 # Common shortcuts
 alias ll="ls -la"  # List all files in long format
 alias cls="clear"  # Clear the terminal screen
-
+alias copy="pbcopy"
+alias gds="git diff HEAD --stat"
+alias git
 # ======================
 # Custom Functions
 # ======================
@@ -159,3 +161,10 @@ export PATH="/Users/marvinvilaysack/.rd/bin:$PATH"
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh) # add autocomplete permanently to your zsh shell
 
 export PATH=~/.npm-global/bin:$PATH
+
+### Added by Claude for zinit installation ###
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of zinit installation ###
+
