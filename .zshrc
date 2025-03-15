@@ -16,7 +16,7 @@ compinit
 # Enable Powerlevel10k theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-Load Powerlevel10k (if not already loaded)
+# Load Powerlevel10k (if not already loaded)
 if [[ -f ~/powerlevel10k/powerlevel10k.zsh-theme ]]; then
     source ~/powerlevel10k/powerlevel10k.zsh-theme
 else
@@ -48,7 +48,8 @@ alias ll="ls -la"  # List all files in long format
 alias cls="clear"  # Clear the terminal screen
 alias copy="pbcopy"
 alias gds="git diff HEAD --stat"
-alias git
+# git aliases
+alias gs="git status"
 # ======================
 # Custom Functions
 # ======================
@@ -168,3 +169,4 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of zinit installation ###
 
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
