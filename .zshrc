@@ -78,6 +78,53 @@ export EDITOR="nvim"
 export CLICOLOR=1
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 
+
+alias lt='eza --tree --level=2 --long --icons --git'
+
+
+
+
+# aerospace
+alias as='aerospace'
+function ff() {
+    aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
+}
+
+
+
+
+# Git
+alias gc="git commit -m"
+alias gca="git commit -a -m"
+alias gp="git push origin HEAD"
+alias gpu="git pull origin"
+alias gst="git status"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias gdiff="git diff"
+alias gco="git checkout"
+alias gb='git branch'
+alias gba='git branch -a'
+alias gadd='git add'
+alias ga='git add -p'
+alias gcoall='git checkout -- .'
+alias gr='git remote'
+alias gre='git reset'
+
+# Docker
+alias dc="docker compose"
+alias dps="docker ps"
+alias dpa="docker ps -a"
+alias dl="docker ps -l -q"
+alias dx="docker exec -it"
+
+# Dirs
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+
 # ======================
 # End of Configuration
 # ======================
@@ -130,8 +177,8 @@ function zlist() {
 alias zcmds="zlist"
 alias k="kubectl"
 # Enable autocompletion
-# autoload -Uz compinit
-# compinit
+autoload -Uz compinit
+compinit
 alias config='cd ~/.config'
 
 

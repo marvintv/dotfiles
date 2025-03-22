@@ -11,19 +11,14 @@ backup_config() {
 
 # Create necessary config directories
 mkdir -p "$HOME/.config"
-#TODO
 
-#Backup
-#TEST
 # Backup existing configs
 backup_config "$HOME/.config/nvim"
 backup_config "$HOME/.config/tmux"
 backup_config "$HOME/.config/yazi"
+backup_config "$HOME/.aerospace.toml"
 # backup_config "$HOME/.zshrc"
 
-#TODO
-
-#TODO
 # Get the directory where this script is located
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -31,6 +26,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ln -sf "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 ln -sf "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 ln -sf "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
+ln -sf "$DOTFILES_DIR/aerospace.toml" "$HOME/.aerospace.toml"
 # ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
 echo "Config files linked successfully!"
