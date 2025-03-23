@@ -191,15 +191,15 @@ end if'
 '''
 alt-ctrl-f = 'layout floating tiling'
 # Center and resize floating window to 80% of screen
-alt-shift-c = 'exec-and-forget ~/dotfiles/aerospace/toggle-floating-centered.sh'
+alt-shift-c = 'exec-and-forget ~/.config/aerospace/toggle-floating-centered.sh'
 # Resize floating window while keeping centered
-alt-shift-equal = 'exec-and-forget ~/dotfiles/aerospace/resize-floating-centered.sh 100 100'
-alt-shift-minus = 'exec-and-forget ~/dotfiles/aerospace/resize-floating-centered.sh -100 -100'
+alt-shift-equal = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.sh 100 100'
+alt-shift-minus = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.sh -100 -100'
 # Move floating window (75px increments) with vim-style keys
-alt-shift-k = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh 0 -75'  # up
-alt-shift-j = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh 0 75'   # down
-alt-shift-h = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh -75 0'  # left
-alt-shift-l = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh 75 0'   # right
+alt-shift-k = 'exec-and-forget ~/.config/aerospace/move-floating.sh 0 -75'  # up
+alt-shift-j = 'exec-and-forget ~/.config/aerospace/move-floating.sh 0 75'   # down
+alt-shift-h = 'exec-and-forget ~/.config/aerospace/move-floating.sh -75 0'  # left
+alt-shift-l = 'exec-and-forget ~/.config/aerospace/move-floating.sh 75 0'   # right
 
 # Position floating windows in thirds of the screen with Shift+Ctrl+X/C/V
 shift-ctrl-x = '''exec-and-forget osascript -e '
