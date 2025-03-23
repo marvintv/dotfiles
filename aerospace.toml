@@ -60,7 +60,7 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'chrome'
-run = 'layout floating'
+run = 'layout tiling'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'obsidian'
@@ -171,7 +171,20 @@ end tell'
 '''
 alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 alt-s = 'exec-and-forget open -a /Applications/Safari.app'
-alt-g = 'exec-and-forget open -a "Google Chrome"'
+alt-g = '''exec-and-forget osascript -e '
+tell application "System Events"
+    set chromeRunning to (exists process "Google Chrome")
+end tell
+
+if chromeRunning then
+    tell application "Google Chrome" 
+        make new window
+        activate
+    end tell
+else
+    do shell script "open -a \\"Google Chrome\\""
+end if'
+'''
 alt-ctrl-f = 'layout floating tiling'
 
 # Service mode bindings
