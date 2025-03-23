@@ -195,11 +195,96 @@ alt-shift-c = 'exec-and-forget ~/.config/aerospace/toggle-floating-centered.sh'
 # Resize floating window while keeping centered
 alt-shift-equal = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.sh 100 100'
 alt-shift-minus = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.sh -100 -100'
-# Move floating window (75px increments) with vim-style keys
-alt-shift-k = 'exec-and-forget ~/.config/aerospace/move-floating.sh 0 -75'  # up
-alt-shift-j = 'exec-and-forget ~/.config/aerospace/move-floating.sh 0 75'   # down
-alt-shift-h = 'exec-and-forget ~/.config/aerospace/move-floating.sh -75 0'  # left
-alt-shift-l = 'exec-and-forget ~/.config/aerospace/move-floating.sh 75 0'   # right
+# Move floating window (75px increments) with vim-style keys - directly with AppleScript
+# Alt+Shift+HJKL for primary movement
+alt-shift-k = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x, y - 75}
+  end tell
+end tell'
+'''  # up
+
+alt-shift-j = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x, y + 75}
+  end tell
+end tell'
+'''  # down
+
+alt-shift-h = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x - 75, y}
+  end tell
+end tell'
+'''  # left
+
+alt-shift-l = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x + 75, y}
+  end tell
+end tell'
+'''  # right
+
+# Using Ctrl+Alt+Cmd+HJKL for alternative movement (75px increments)
+ctrl-alt-cmd-k = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x, y - 75}
+  end tell
+end tell'
+'''  # up
+
+ctrl-alt-cmd-j = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x, y + 75}
+  end tell
+end tell'
+'''  # down
+
+ctrl-alt-cmd-h = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x - 75, y}
+  end tell
+end tell'
+'''  # left
+
+ctrl-alt-cmd-l = '''exec-and-forget osascript -e '
+tell application "System Events" 
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+    set position of _window to {x + 75, y}
+  end tell
+end tell'
+'''  # right
 
 # Position floating windows in thirds of the screen with Shift+Ctrl+X/C/V
 shift-ctrl-x = '''exec-and-forget osascript -e '
