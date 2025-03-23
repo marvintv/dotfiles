@@ -21,19 +21,18 @@ automatically-unhide-macos-hidden-apps = false
 # Open Spotify with Alt+Ctrl+S
 # alt-ctrl-s = 'exec-and-forget open -a "Spotify"'
 
-
 # Key mapping
 [key-mapping]
-    preset = 'qwerty'
+preset = 'qwerty'
 
 # Window gaps
 [gaps]
 inner.horizontal = 20
-inner.vertical =   20
-outer.left =       40
-outer.bottom =     20
-outer.top =        10
-outer.right =      80
+inner.vertical = 20
+outer.left = 40
+outer.bottom = 20
+outer.top = 10
+outer.right = 80
 
 
 [[on-window-detected]]
@@ -45,6 +44,14 @@ run = 'layout floating'
 if.app-name-regex-substring = 'finder'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-name-regex-substring = 'reminder'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'calendar'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'spotify'
@@ -60,86 +67,100 @@ if.app-name-regex-substring = 'obsidian'
 run = 'layout floating'
 
 
-
 # Main mode bindings
 [mode.main.binding]
-    # Terminal
-    alt-enter = '''exec-and-forget osascript -e '
+# Terminal
+alt-enter = '''exec-and-forget osascript -e '
     tell application "Alacritty"
         do script
         activate
     end tell'
     '''
 
-    # Layout controls
-    alt-slash = 'layout tiles horizontal vertical'
-    alt-comma = 'layout accordion horizontal vertical'
+# Layout controls
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
 
-    # Window focus
-    alt-h = 'focus left'
-    alt-j = 'focus down'
-    alt-k = 'focus up'
-    alt-l = 'focus right'
+# Window focus
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
 
-    # Move windows - USING ALT+CTRL instead of ALT+SHIFT
-    alt-ctrl-h = 'move left'
-    alt-ctrl-j = 'move down'
-    alt-ctrl-k = 'move up'
-    alt-ctrl-l = 'move right'
 
-    # Resize
-    alt-minus = 'resize smart -50'
-    alt-equal = 'resize smart +50'
+# Switch between instances of the same app windows
 
-    # Workspace switching
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
+# Open new window for current app (Cmd+N equivalent)
+alt-n = '''exec-and-forget osascript -e '
+tell application (path to frontmost application as text)
+    tell application "System Events" to keystroke "n" using {command down}
+end tell'
+'''
 
-    # Move windows to workspaces - USING ALT+CTRL instead of ALT+SHIFT
-    alt-ctrl-1 = 'move-node-to-workspace 1'
-    alt-ctrl-2 = 'move-node-to-workspace 2'
-    alt-ctrl-3 = 'move-node-to-workspace 3'
-    alt-ctrl-4 = 'move-node-to-workspace 4'
-    alt-ctrl-5 = 'move-node-to-workspace 5'
-    alt-ctrl-6 = 'move-node-to-workspace 6'
-    alt-ctrl-7 = 'move-node-to-workspace 7'
-    alt-ctrl-8 = 'move-node-to-workspace 8'
-    alt-ctrl-9 = 'move-node-to-workspace 9'
+# Move windows - USING ALT+CTRL instead of ALT+SHIFT
+alt-ctrl-h = 'move left'
+alt-ctrl-j = 'move down'
+alt-ctrl-k = 'move up'
+alt-ctrl-l = 'move right'
 
-    # Quick switch - commented out to disable alt-tab
-    # alt-tab = 'workspace-back-and-forth'
-    alt-ctrl-tab = 'move-workspace-to-monitor --wrap-around next'
+# Resize
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
 
-    # Enter service mode with alt+ctrl+semicolon
-    alt-ctrl-semicolon = 'mode service'
-    alt-shift-enter = 'mode apps'
-    alt-t = 'exec-and-forget open -a /Applications/Telegram.app'
-    alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
-    alt-s = 'exec-and-forget open -a /Applications/Safari.app'
-    alt-g = 'exec-and-forget open -a "Google Chrome"'
-    alt-ctrl-f = 'layout floating tiling'
+# Workspace switching
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Move windows to workspaces - USING ALT+CTRL instead of ALT+SHIFT
+alt-ctrl-1 = 'move-node-to-workspace 1'
+alt-ctrl-2 = 'move-node-to-workspace 2'
+alt-ctrl-3 = 'move-node-to-workspace 3'
+alt-ctrl-4 = 'move-node-to-workspace 4'
+alt-ctrl-5 = 'move-node-to-workspace 5'
+alt-ctrl-6 = 'move-node-to-workspace 6'
+alt-ctrl-7 = 'move-node-to-workspace 7'
+alt-ctrl-8 = 'move-node-to-workspace 8'
+alt-ctrl-9 = 'move-node-to-workspace 9'
+
+# Quick switch - commented out to disable alt-tab
+# alt-tab = 'workspace-back-and-forth'
+alt-ctrl-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Enter service mode with alt+ctrl+semicolon
+alt-ctrl-semicolon = 'mode service'
+alt-shift-enter = 'mode apps'
+alt-t = 'exec-and-forget open -a /Applications/Telegram.app'
+alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
+alt-s = 'exec-and-forget open -a /Applications/Safari.app'
+alt-g = 'exec-and-forget open -a "Google Chrome"'
+alt-ctrl-f = 'layout floating tiling'
 
 # Service mode bindings
 [mode.service.binding]
-    esc = ['reload-config', 'mode main']
-    r = ['flatten-workspace-tree', 'mode main'] # reset layout
-    f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-    backspace = ['close-all-windows-but-current', 'mode main']
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+f = [
+    'layout floating tiling',
+    'mode main',
+] # Toggle between floating and tiling layout
+backspace = ['close-all-windows-but-current', 'mode main']
 
-    # USING ALT+CTRL instead of ALT+SHIFT for joining
-    alt-ctrl-h = ['join-with left', 'mode main']
-    alt-ctrl-j = ['join-with down', 'mode main']
-    alt-ctrl-k = ['join-with up', 'mode main']
-    alt-ctrl-l = ['join-with right', 'mode main']
+# USING ALT+CTRL instead of ALT+SHIFT for joining
+#alt-grave = 'focus-workspace-app-current-window-next'
 
-    # Volume controls
-    down = 'volume down'
-    up = 'volume up'
-    shift-down = ['volume set 0', 'mode main']
+alt-ctrl-h = ['join-with left', 'mode main']
+alt-ctrl-j = ['join-with down', 'mode main']
+alt-ctrl-k = ['join-with up', 'mode main']
+alt-ctrl-l = ['join-with right', 'mode main']
+
+# Volume controls
+down = 'volume down'
+up = 'volume up'
+shift-down = ['volume set 0', 'mode main']

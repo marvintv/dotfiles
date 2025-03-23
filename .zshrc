@@ -175,7 +175,9 @@ function zlist() {
 
 # Short alias for easy access
 alias zcmds="zlist"
+## kubectl commads
 alias k="kubectl"
+alias kgp="kubectl get pods"
 # Enable autocompletion
 autoload -Uz compinit
 compinit
