@@ -1,8 +1,10 @@
 # AeroSpace configuration file
 
 after-login-command = []
-after-startup-command = []
-start-at-login = false
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+]
+start-at-login = true
 
 # Normalizations
 enable-normalization-flatten-containers = true
@@ -87,6 +89,8 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 
+# Window focus continues below
+
 
 # Switch between instances of the same app windows - using Alt-T instead
 
@@ -141,12 +145,12 @@ tell application "System Events"
     set frontApp to first application process whose frontmost is true
     set frontAppName to name of frontApp
     set windowCount to count of windows of frontApp
-    
+
     if windowCount > 1 then
         tell process frontAppName
             set win_list to windows
             set index_current to 1
-            
+
             -- Find current focused window
             repeat with i from 1 to count of win_list
                 if value of attribute "AXMain" of item i of win_list is true then
@@ -154,14 +158,14 @@ tell application "System Events"
                     exit repeat
                 end if
             end repeat
-            
+
             -- Find index of next window
             if index_current is equal to count of win_list then
                 set index_next to 1
             else
                 set index_next to index_current + 1
             end if
-            
+
             -- Activate next window
             set value of attribute "AXMain" of item index_next of win_list to true
             perform action "AXRaise" of item index_next of win_list
@@ -177,7 +181,7 @@ tell application "System Events"
 end tell
 
 if chromeRunning then
-    tell application "Google Chrome" 
+    tell application "Google Chrome"
         make new window
         activate
     end tell
@@ -186,6 +190,86 @@ else
 end if'
 '''
 alt-ctrl-f = 'layout floating tiling'
+# Center and resize floating window to 80% of screen
+alt-shift-c = 'exec-and-forget ~/dotfiles/aerospace/toggle-floating-centered.sh'
+# Resize floating window while keeping centered
+alt-shift-equal = 'exec-and-forget ~/dotfiles/aerospace/resize-floating-centered.sh 100 100'
+alt-shift-minus = 'exec-and-forget ~/dotfiles/aerospace/resize-floating-centered.sh -100 -100'
+# Move floating window (75px increments) with vim-style keys
+alt-shift-k = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh 0 -75'  # up
+alt-shift-j = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh 0 75'   # down
+alt-shift-h = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh -75 0'  # left
+alt-shift-l = 'exec-and-forget ~/dotfiles/aerospace/move-floating.sh 75 0'   # right
+
+# Position floating windows in thirds of the screen with Shift+Ctrl+X/C/V
+shift-ctrl-x = '''exec-and-forget osascript -e '
+    tell application "System Events"
+        set frontApp to first application process whose frontmost is true
+        set frontAppName to name of frontApp
+        set appWindow to first window of process frontAppName
+        
+        -- Get screen dimensions
+        set screenSize to size of window of desktop
+        set screenWidth to item 1 of screenSize
+        set screenHeight to item 2 of screenSize
+        
+        -- Left third position
+        set newWidth to screenWidth / 3
+        set newHeight to screenHeight
+        set newX to 0
+        set newY to 0
+        
+        -- Set window size and position
+        set position of appWindow to {newX, newY}
+        set size of appWindow to {newWidth, newHeight}
+    end tell'
+'''
+
+shift-ctrl-c = '''exec-and-forget osascript -e '
+    tell application "System Events"
+        set frontApp to first application process whose frontmost is true
+        set frontAppName to name of frontApp
+        set appWindow to first window of process frontAppName
+        
+        -- Get screen dimensions
+        set screenSize to size of window of desktop
+        set screenWidth to item 1 of screenSize
+        set screenHeight to item 2 of screenSize
+        
+        -- Center third position
+        set newWidth to screenWidth / 3
+        set newHeight to screenHeight
+        set newX to screenWidth / 3
+        set newY to 0
+        
+        -- Set window size and position
+        set position of appWindow to {newX, newY}
+        set size of appWindow to {newWidth, newHeight}
+    end tell'
+'''
+
+shift-ctrl-v = '''exec-and-forget osascript -e '
+    tell application "System Events"
+        set frontApp to first application process whose frontmost is true
+        set frontAppName to name of frontApp
+        set appWindow to first window of process frontAppName
+        
+        -- Get screen dimensions
+        set screenSize to size of window of desktop
+        set screenWidth to item 1 of screenSize
+        set screenHeight to item 2 of screenSize
+        
+        -- Right third position
+        set newWidth to screenWidth / 3
+        set newHeight to screenHeight
+        set newX to (screenWidth / 3) * 2
+        set newY to 0
+        
+        -- Set window size and position
+        set position of appWindow to {newX, newY}
+        set size of appWindow to {newWidth, newHeight}
+    end tell'
+'''
 
 # Service mode bindings
 [mode.service.binding]
@@ -208,3 +292,5 @@ alt-ctrl-l = ['join-with right', 'mode main']
 down = 'volume down'
 up = 'volume up'
 shift-down = ['volume set 0', 'mode main']
+
+# End of service mode bindings
