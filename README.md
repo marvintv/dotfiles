@@ -4,7 +4,6 @@
 
 ## Configs
 ```bash
-git clone https://github.com/agalea91/dotfiles.git ~/dotfiles
 ln -sf ~/dotfiles/nvim ~/.config/nvim
 ln -sf ~/dotfiles/tmux ~/.config/tmux
 ln -sf ~/dotfiles/yazi ~/.config/yazi
