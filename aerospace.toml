@@ -88,7 +88,7 @@ alt-k = 'focus up'
 alt-l = 'focus right'
 
 
-# Switch between instances of the same app windows
+# Switch between instances of the same app windows - using Alt-T instead
 
 # Open new window for current app (Cmd+N equivalent)
 alt-n = '''exec-and-forget osascript -e '
@@ -136,7 +136,39 @@ alt-ctrl-tab = 'move-workspace-to-monitor --wrap-around next'
 # Enter service mode with alt+ctrl+semicolon
 alt-ctrl-semicolon = 'mode service'
 alt-shift-enter = 'mode apps'
-alt-t = 'exec-and-forget open -a /Applications/Telegram.app'
+alt-t = '''exec-and-forget osascript -e '
+tell application "System Events"
+    set frontApp to first application process whose frontmost is true
+    set frontAppName to name of frontApp
+    set windowCount to count of windows of frontApp
+    
+    if windowCount > 1 then
+        tell process frontAppName
+            set win_list to windows
+            set index_current to 1
+            
+            -- Find current focused window
+            repeat with i from 1 to count of win_list
+                if value of attribute "AXMain" of item i of win_list is true then
+                    set index_current to i
+                    exit repeat
+                end if
+            end repeat
+            
+            -- Find index of next window
+            if index_current is equal to count of win_list then
+                set index_next to 1
+            else
+                set index_next to index_current + 1
+            end if
+            
+            -- Activate next window
+            set value of attribute "AXMain" of item index_next of win_list to true
+            perform action "AXRaise" of item index_next of win_list
+        end tell
+    end if
+end tell'
+'''
 alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
 alt-s = 'exec-and-forget open -a /Applications/Safari.app'
 alt-g = 'exec-and-forget open -a "Google Chrome"'
@@ -153,7 +185,6 @@ f = [
 backspace = ['close-all-windows-but-current', 'mode main']
 
 # USING ALT+CTRL instead of ALT+SHIFT for joining
-#alt-grave = 'focus-workspace-app-current-window-next'
 
 alt-ctrl-h = ['join-with left', 'mode main']
 alt-ctrl-j = ['join-with down', 'mode main']
