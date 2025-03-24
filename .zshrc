@@ -13,6 +13,16 @@ compinit
 # ZSH Configuration
 # ======================
 
+# History Configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+setopt INC_APPEND_HISTORY
+
 # Enable Powerlevel10k theme
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -130,6 +140,17 @@ alias ......="cd ../../../../.."
 # End of Configuration
 # ======================
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# Handle window resize properly
+TRAPWINCH() {
+  zle && zle reset-prompt
+  tput clear  # Clear the screen
+  prompt_p10k_setup  # Redraw prompt (for Powerlevel10k)
+}
+
+# Enable better resizing support
+setopt promptsubst
+setopt NO_PROMPT_CR
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
