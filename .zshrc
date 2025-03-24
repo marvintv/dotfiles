@@ -48,6 +48,7 @@ alias ll="ls -la"  # List all files in long format
 alias cls="clear"  # Clear the terminal screen
 alias copy="pbcopy"
 alias gds="git diff HEAD --stat"
+alias lg="lazygit"
 # git aliases
 alias gs="git status"
 # ======================

@@ -174,7 +174,7 @@ tell application "System Events"
 end tell'
 '''
 alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
-alt-s = 'exec-and-forget open -a /Applications/Safari.app'
+alt-s = 'exec-and-forget open -a /Applications/Spotify.app'
 alt-g = '''exec-and-forget osascript -e '
 tell application "System Events"
     set chromeRunning to (exists process "Google Chrome")
@@ -198,17 +198,17 @@ alt-shift-minus = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.
 # Move floating window (75px increments) with vim-style keys - directly with AppleScript
 # Alt+Shift+HJKL for primary movement
 alt-shift-k = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create smooth animation with 10 steps
     set moveDistance to 75
     set stepCount to 10
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x, y - (stepSize * i)}
       delay 0.002 -- Small delay between steps for smoother animation
@@ -218,17 +218,17 @@ end tell'
 '''  # up
 
 alt-shift-j = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create smooth animation with 10 steps
     set moveDistance to 75
     set stepCount to 10
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x, y + (stepSize * i)}
       delay 0.002 -- Small delay between steps for smoother animation
@@ -238,17 +238,17 @@ end tell'
 '''  # down
 
 alt-shift-h = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create smooth animation with 10 steps
     set moveDistance to 75
     set stepCount to 10
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x - (stepSize * i), y}
       delay 0.002 -- Small delay between steps for smoother animation
@@ -258,17 +258,17 @@ end tell'
 '''  # left
 
 alt-shift-l = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create smooth animation with 10 steps
     set moveDistance to 75
     set stepCount to 10
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x + (stepSize * i), y}
       delay 0.002 -- Small delay between steps for smoother animation
@@ -279,17 +279,17 @@ end tell'
 
 # Using Ctrl+Alt+Cmd+HJKL for alternative movement (75px increments)
 ctrl-alt-cmd-k = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create quick animation with fewer steps
     set moveDistance to 100
     set stepCount to 5
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x, y - (stepSize * i)}
       delay 0.001 -- Minimal delay for faster animation
@@ -299,17 +299,17 @@ end tell'
 '''  # up
 
 ctrl-alt-cmd-j = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create quick animation with fewer steps
     set moveDistance to 100
     set stepCount to 5
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x, y + (stepSize * i)}
       delay 0.001 -- Minimal delay for faster animation
@@ -319,17 +319,17 @@ end tell'
 '''  # down
 
 ctrl-alt-cmd-h = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create quick animation with fewer steps
     set moveDistance to 100
     set stepCount to 5
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x - (stepSize * i), y}
       delay 0.001 -- Minimal delay for faster animation
@@ -339,17 +339,17 @@ end tell'
 '''  # left
 
 ctrl-alt-cmd-l = '''exec-and-forget osascript -e '
-tell application "System Events" 
+tell application "System Events"
   set _app to name of first application process whose frontmost is true
   tell process _app
     set _window to front window
     set {x, y} to position of _window
-    
+
     -- Create quick animation with fewer steps
     set moveDistance to 100
     set stepCount to 5
     set stepSize to moveDistance / stepCount
-    
+
     repeat with i from 1 to stepCount
       set position of _window to {x + (stepSize * i), y}
       delay 0.001 -- Minimal delay for faster animation
@@ -364,18 +364,18 @@ shift-ctrl-x = '''exec-and-forget osascript -e '
         set frontApp to first application process whose frontmost is true
         set frontAppName to name of frontApp
         set appWindow to first window of process frontAppName
-        
+
         -- Get screen dimensions
         set screenSize to size of window of desktop
         set screenWidth to item 1 of screenSize
         set screenHeight to item 2 of screenSize
-        
+
         -- Left third position
         set newWidth to screenWidth / 3
         set newHeight to screenHeight
         set newX to 0
         set newY to 0
-        
+
         -- Set window size and position
         set position of appWindow to {newX, newY}
         set size of appWindow to {newWidth, newHeight}
@@ -387,18 +387,18 @@ shift-ctrl-c = '''exec-and-forget osascript -e '
         set frontApp to first application process whose frontmost is true
         set frontAppName to name of frontApp
         set appWindow to first window of process frontAppName
-        
+
         -- Get screen dimensions
         set screenSize to size of window of desktop
         set screenWidth to item 1 of screenSize
         set screenHeight to item 2 of screenSize
-        
+
         -- Center third position
         set newWidth to screenWidth / 3
         set newHeight to screenHeight
         set newX to screenWidth / 3
         set newY to 0
-        
+
         -- Set window size and position
         set position of appWindow to {newX, newY}
         set size of appWindow to {newWidth, newHeight}
@@ -410,18 +410,18 @@ shift-ctrl-v = '''exec-and-forget osascript -e '
         set frontApp to first application process whose frontmost is true
         set frontAppName to name of frontApp
         set appWindow to first window of process frontAppName
-        
+
         -- Get screen dimensions
         set screenSize to size of window of desktop
         set screenWidth to item 1 of screenSize
         set screenHeight to item 2 of screenSize
-        
+
         -- Right third position
         set newWidth to screenWidth / 3
         set newHeight to screenHeight
         set newX to (screenWidth / 3) * 2
         set newY to 0
-        
+s;
         -- Set window size and position
         set position of appWindow to {newX, newY}
         set size of appWindow to {newWidth, newHeight}

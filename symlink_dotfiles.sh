@@ -28,8 +28,9 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ln -sf "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 ln -sf "$DOTFILES_DIR/tmux" "$HOME/.config/tmux"
 ln -sf "$DOTFILES_DIR/yazi" "$HOME/.config/yazi"
-ln -sf "$DOTFILES_DIR/aerospace" "$HOME/.config/aerospace"
-ln -sf "$DOTFILES_DIR/aerospace.toml" "$HOME/.aerospace.toml"
+# Create aerospace config directory instead of symlinking the whole directory
+mkdir -p "$HOME/.config/aerospace"
+ln -sf "$DOTFILES_DIR/aerospace/config.toml" "$HOME/.config/aerospace/config.toml"
 # ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 
 echo "Config files linked successfully!"
