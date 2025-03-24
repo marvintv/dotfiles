@@ -1,8 +1,10 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
+-- bootstrap lazy.nvim, LazyVim and your pluginsutoread
 -- Set leader key before loading any plugins
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
+vim.o.autoread = true
+vim.cmd([[autocmd FocusGained,BufEnter * checktime]])
+--
 -- Set high-priority options early (like PATH modification)
 local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
 vim.env.PATH = mason_bin .. ":" .. vim.env.PATH
