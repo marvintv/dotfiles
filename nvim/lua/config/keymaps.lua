@@ -76,7 +76,7 @@ vim.keymap.set("n", "<leader>tt", function()
   vim.cmd("startinsert")
 
   -- Add a way to close it with <leader>tt from terminal mode
-  vim.api.nvim_buf_set_keymap(buf, "t", "<leader>t", "<C-\\><C-n>:q<CR>", { noremap = true, silent = true })
+  vim.api.nvim_buf_set_keymap(buf, "t", "<leader>tt", "<C-\\><C-n>:q<CR>", { noremap = true, silent = true })
 end, { desc = "Open floating terminal" })
 
 -- format code using telescope
