@@ -43,6 +43,9 @@ vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "save file" })
 -- reset file to last saved state
 vim.keymap.set("n", "<leader>r", ":e!<cr>", { silent = true, desc = "reset file to last saved state" })
 
+-- resets to esc
+vim.keymap.set("i", "jk", "<Esc>")
+
 --
 -- vim.keymap.set("n", "<leader>t", function()
 --   if vim.bo.buftype == "nofile" then

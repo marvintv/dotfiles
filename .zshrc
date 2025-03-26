@@ -61,6 +61,8 @@ alias gds="git diff HEAD --stat"
 alias lg="lazygit"
 # git aliases
 alias gs="git status"
+alias dot="cd ~/dotfiles"
+alias pn="pnpm"
 # ======================
 # Custom Functions
 # ======================

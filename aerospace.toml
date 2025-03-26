@@ -2,7 +2,7 @@
 
 after-login-command = []
 after-startup-command = [
-  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
 ]
 start-at-login = true
 
@@ -31,10 +31,10 @@ preset = 'qwerty'
 [gaps]
 inner.horizontal = 15
 inner.vertical = 10
-outer.left = 15  #default 40
+outer.left = 15       #default 40
 outer.bottom = 20
 outer.top = 10
-outer.right = 15 #default 80
+outer.right = 15      #default 80
 
 
 [[on-window-detected]]
@@ -102,10 +102,10 @@ end tell'
 '''
 
 # Move windows - USING ALT+CTRL instead of ALT+SHIFT
-alt-ctrl-h = 'move left'
-alt-ctrl-j = 'move down'
-alt-ctrl-k = 'move up'
-alt-ctrl-l = 'move right'
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
 
 # Resize
 alt-minus = 'resize smart -50'
@@ -199,85 +199,6 @@ alt-shift-equal = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.
 alt-shift-minus = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.sh -100 -100'
 # Move floating window (75px increments) with vim-style keys - directly with AppleScript
 # Alt+Shift+HJKL for primary movement
-alt-shift-k = '''exec-and-forget osascript -e '
-tell application "System Events"
-  set _app to name of first application process whose frontmost is true
-  tell process _app
-    set _window to front window
-    set {x, y} to position of _window
-
-    -- Create smooth animation with 10 steps
-    set moveDistance to 75
-    set stepCount to 10
-    set stepSize to moveDistance / stepCount
-
-    repeat with i from 1 to stepCount
-      set position of _window to {x, y - (stepSize * i)}
-      delay 0.002 -- Small delay between steps for smoother animation
-    end repeat
-  end tell
-end tell'
-'''  # up
-
-alt-shift-j = '''exec-and-forget osascript -e '
-tell application "System Events"
-  set _app to name of first application process whose frontmost is true
-  tell process _app
-    set _window to front window
-    set {x, y} to position of _window
-
-    -- Create smooth animation with 10 steps
-    set moveDistance to 75
-    set stepCount to 10
-    set stepSize to moveDistance / stepCount
-
-    repeat with i from 1 to stepCount
-      set position of _window to {x, y + (stepSize * i)}
-      delay 0.002 -- Small delay between steps for smoother animation
-    end repeat
-  end tell
-end tell'
-'''  # down
-
-alt-shift-h = '''exec-and-forget osascript -e '
-tell application "System Events"
-  set _app to name of first application process whose frontmost is true
-  tell process _app
-    set _window to front window
-    set {x, y} to position of _window
-
-    -- Create smooth animation with 10 steps
-    set moveDistance to 75
-    set stepCount to 10
-    set stepSize to moveDistance / stepCount
-
-    repeat with i from 1 to stepCount
-      set position of _window to {x - (stepSize * i), y}
-      delay 0.002 -- Small delay between steps for smoother animation
-    end repeat
-  end tell
-end tell'
-'''  # left
-
-alt-shift-l = '''exec-and-forget osascript -e '
-tell application "System Events"
-  set _app to name of first application process whose frontmost is true
-  tell process _app
-    set _window to front window
-    set {x, y} to position of _window
-
-    -- Create smooth animation with 10 steps
-    set moveDistance to 75
-    set stepCount to 10
-    set stepSize to moveDistance / stepCount
-
-    repeat with i from 1 to stepCount
-      set position of _window to {x + (stepSize * i), y}
-      delay 0.002 -- Small delay between steps for smoother animation
-    end repeat
-  end tell
-end tell'
-'''  # right
 
 # Using Ctrl+Alt+Cmd+HJKL for alternative movement (75px increments)
 ctrl-alt-cmd-k = '''exec-and-forget osascript -e '
@@ -298,7 +219,7 @@ tell application "System Events"
     end repeat
   end tell
 end tell'
-'''  # up
+''' # up
 
 ctrl-alt-cmd-j = '''exec-and-forget osascript -e '
 tell application "System Events"
@@ -318,7 +239,7 @@ tell application "System Events"
     end repeat
   end tell
 end tell'
-'''  # down
+''' # down
 
 ctrl-alt-cmd-h = '''exec-and-forget osascript -e '
 tell application "System Events"
@@ -338,7 +259,7 @@ tell application "System Events"
     end repeat
   end tell
 end tell'
-'''  # left
+''' # left
 
 ctrl-alt-cmd-l = '''exec-and-forget osascript -e '
 tell application "System Events"
@@ -358,7 +279,7 @@ tell application "System Events"
     end repeat
   end tell
 end tell'
-'''  # right
+''' # right
 
 # Position floating windows in thirds of the screen with Shift+Ctrl+X/C/V
 shift-ctrl-x = '''exec-and-forget osascript -e '
