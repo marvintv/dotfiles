@@ -1,0 +1,453 @@
+# AeroSpace configuration file
+
+after-login-command = []
+after-startup-command = [
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
+]
+start-at-login = true
+
+# Normalizations
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Layout configuration
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus when focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# macOS features
+automatically-unhide-macos-hidden-apps = false
+# Open Spotify with Alt+Ctrl+S
+# alt-ctrl-s = 'exec-and-forget open -a "Spotify"'
+
+# Key mapping
+[key-mapping]
+preset = 'qwerty'
+
+# Window gaps
+[gaps]
+inner.horizontal = 20
+inner.vertical = 20
+outer.left = 20
+outer.bottom = 20
+outer.top = 10
+outer.right = 50
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'safari'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'reminder'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'calendar'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'spotify'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'chrome'
+run = 'layout tiling'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'obsidian'
+run = 'layout floating'
+
+
+# Main mode bindings
+[mode.main.binding]
+# Terminal
+alt-enter = '''exec-and-forget osascript -e '
+    tell application "Alacritty"
+        do script
+        activate
+    end tell'
+    '''
+
+# Layout controls
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+
+# Window focus
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Window focus continues below
+
+
+# Switch between instances of the same app windows - using Alt-T instead
+
+# Open new window for current app (Cmd+N equivalent)
+alt-n = '''exec-and-forget osascript -e '
+tell application (path to frontmost application as text)
+    tell application "System Events" to keystroke "n" using {command down}
+end tell'
+'''
+
+# Move windows - USING ALT+CTRL instead of ALT+SHIFT
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# Resize
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+
+# Workspace switching
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# Move windows to workspaces - USING ALT+CTRL instead of ALT+SHIFT
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+# Quick switch - commented out to disable alt-tab
+# alt-tab = 'workspace-back-and-forth'
+alt-ctrl-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Enter service mode with alt+ctrl+semicolon
+alt-ctrl-semicolon = 'mode service'
+alt-shift-enter = 'mode apps'
+alt-t = '''exec-and-forget osascript -e '
+tell application "System Events"
+    set frontApp to first application process whose frontmost is true
+    set frontAppName to name of frontApp
+    set windowCount to count of windows of frontApp
+
+    if windowCount > 1 then
+        tell process frontAppName
+            set win_list to windows
+            set index_current to 1
+
+            -- Find current focused window
+            repeat with i from 1 to count of win_list
+                if value of attribute "AXMain" of item i of win_list is true then
+                    set index_current to i
+                    exit repeat
+                end if
+            end repeat
+
+            -- Find index of next window
+            if index_current is equal to count of win_list then
+                set index_next to 1
+            else
+                set index_next to index_current + 1
+            end if
+
+            -- Activate next window
+            set value of attribute "AXMain" of item index_next of win_list to true
+            perform action "AXRaise" of item index_next of win_list
+        end tell
+    end if
+end tell'
+'''
+alt-o = 'exec-and-forget open -a /Applications/Obsidian.app'
+alt-s = 'exec-and-forget open -a /Applications/Spotify.app'
+alt-g = '''exec-and-forget osascript -e '
+tell application "System Events"
+    set chromeRunning to (exists process "Google Chrome")
+end tell
+
+if chromeRunning then
+    tell application "Google Chrome"
+        make new window
+        activate
+    end tell
+else
+    do shell script "open -a \\"Google Chrome\\""
+end if'
+'''
+alt-ctrl-f = 'layout floating tiling'
+# Center and resize floating window to 80% of screen
+alt-shift-c = 'exec-and-forget ~/.config/aerospace/toggle-floating-centered.sh'
+# Resize floating window while keeping centered
+alt-shift-equal = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.sh 100 100'
+alt-shift-minus = 'exec-and-forget ~/.config/aerospace/resize-floating-centered.sh -100 -100'
+# Move floating window (75px increments) with vim-style keys - directly with AppleScript
+# Alt+Shift+HJKL for primary movement
+alt-ctrl-k = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create smooth animation with 10 steps
+    set moveDistance to 75
+    set stepCount to 10
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x, y - (stepSize * i)}
+      delay 0.002 -- Small delay between steps for smoother animation
+    end repeat
+  end tell
+end tell'
+''' # up
+
+alt-ctrl-j = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create smooth animation with 10 steps
+    set moveDistance to 75
+    set stepCount to 10
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x, y + (stepSize * i)}
+      delay 0.002 -- Small delay between steps for smoother animation
+    end repeat
+  end tell
+end tell'
+''' # down
+
+alt-ctrl-h = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create smooth animation with 10 steps
+    set moveDistance to 75
+    set stepCount to 10
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x - (stepSize * i), y}
+      delay 0.002 -- Small delay between steps for smoother animation
+    end repeat
+  end tell
+end tell'
+''' # left
+
+alt-ctrl-l = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create smooth animation with 10 steps
+    set moveDistance to 75
+    set stepCount to 10
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x + (stepSize * i), y}
+      delay 0.002 -- Small delay between steps for smoother animation
+    end repeat
+  end tell
+end tell'
+''' # right
+
+# Using Ctrl+Alt+Cmd+HJKL for alternative movement (75px increments)
+ctrl-alt-cmd-k = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create quick animation with fewer steps
+    set moveDistance to 100
+    set stepCount to 5
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x, y - (stepSize * i)}
+      delay 0.001 -- Minimal delay for faster animation
+    end repeat
+  end tell
+end tell'
+''' # up
+
+ctrl-alt-cmd-j = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create quick animation with fewer steps
+    set moveDistance to 100
+    set stepCount to 5
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x, y + (stepSize * i)}
+      delay 0.001 -- Minimal delay for faster animation
+    end repeat
+  end tell
+end tell'
+''' # down
+
+ctrl-alt-cmd-h = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create quick animation with fewer steps
+    set moveDistance to 100
+    set stepCount to 5
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x - (stepSize * i), y}
+      delay 0.001 -- Minimal delay for faster animation
+    end repeat
+  end tell
+end tell'
+''' # left
+
+ctrl-alt-cmd-l = '''exec-and-forget osascript -e '
+tell application "System Events"
+  set _app to name of first application process whose frontmost is true
+  tell process _app
+    set _window to front window
+    set {x, y} to position of _window
+
+    -- Create quick animation with fewer steps
+    set moveDistance to 100
+    set stepCount to 5
+    set stepSize to moveDistance / stepCount
+
+    repeat with i from 1 to stepCount
+      set position of _window to {x + (stepSize * i), y}
+      delay 0.001 -- Minimal delay for faster animation
+    end repeat
+  end tell
+end tell'
+''' # right
+
+# Position floating windows in thirds of the screen with Shift+Ctrl+X/C/V
+shift-ctrl-x = '''exec-and-forget osascript -e '
+    tell application "System Events"
+        set frontApp to first application process whose frontmost is true
+        set frontAppName to name of frontApp
+        set appWindow to first window of process frontAppName
+
+        -- Get screen dimensions
+        set screenSize to size of window of desktop
+        set screenWidth to item 1 of screenSize
+        set screenHeight to item 2 of screenSize
+
+        -- Left third position
+        set newWidth to screenWidth / 3
+        set newHeight to screenHeight
+        set newX to 0
+        set newY to 0
+
+        -- Set window size and position
+        set position of appWindow to {newX, newY}
+        set size of appWindow to {newWidth, newHeight}
+    end tell'
+'''
+
+shift-ctrl-c = '''exec-and-forget osascript -e '
+    tell application "System Events"
+        set frontApp to first application process whose frontmost is true
+        set frontAppName to name of frontApp
+        set appWindow to first window of process frontAppName
+
+        -- Get screen dimensions
+        set screenSize to size of window of desktop
+        set screenWidth to item 1 of screenSize
+        set screenHeight to item 2 of screenSize
+
+        -- Center third position
+        set newWidth to screenWidth / 3
+        set newHeight to screenHeight
+        set newX to screenWidth / 3
+        set newY to 0
+
+        -- Set window size and position
+        set position of appWindow to {newX, newY}
+        set size of appWindow to {newWidth, newHeight}
+    end tell'
+'''
+
+shift-ctrl-v = '''exec-and-forget osascript -e '
+    tell application "System Events"
+        set frontApp to first application process whose frontmost is true
+        set frontAppName to name of frontApp
+        set appWindow to first window of process frontAppName
+
+        -- Get screen dimensions
+        set screenSize to size of window of desktop
+        set screenWidth to item 1 of screenSize
+        set screenHeight to item 2 of screenSize
+
+        -- Right third position
+        set newWidth to screenWidth / 3
+        set newHeight to screenHeight
+        set newX to (screenWidth / 3) * 2
+        set newY to 0
+s;
+        -- Set window size and position
+        set position of appWindow to {newX, newY}
+        set size of appWindow to {newWidth, newHeight}
+    end tell'
+'''
+
+# Service mode bindings
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+f = [
+    'layout floating tiling',
+    'mode main',
+] # Toggle between floating and tiling layout
+backspace = ['close-all-windows-but-current', 'mode main']
+
+# USING ALT+CTRL instead of ALT+SHIFT for joining
+
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
+
+# Volume controls
+down = 'volume down'
+up = 'volume up'
+shift-down = ['volume set 0', 'mode main']
+
+# End of service mode bindings
